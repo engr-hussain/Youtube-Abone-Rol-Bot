@@ -1,0 +1,31 @@
+# Node.js Dependency Directories
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+
+# Environment Variables
+.env
+.env.test
+.env.local
+.env.development
+.env.production
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Runtime Data
+temp_ss.png
+*.log
+logs/
+*.tmp
+
+# IDE Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
