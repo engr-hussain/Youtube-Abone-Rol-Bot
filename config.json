@@ -1,20 +1,20 @@
 {
   "openaiEndpoint": "https://api.kynux.cloud/api/v1",
   "openaiModel": "gpt-4o",
-  "kynuxApiKey": "sk_a514125f0675f4c352f98b4193a1a7f19dd0c9796f2ad10e",
+  "kynuxApiKey": "",
   "youtube": {
     "apiEndpoint": "https://api.kynux.cloud/api/youtube/channel",
-    "channelId": "UC9Y7X5rwTm3GQj936-M5wgg",
-    "channelName": "TED CARS",
+    "channelId": "EXAMPLE",
+    "channelName": "EXAMPLE",
     "checkIntervalMinutes": 10,
     "checkLatestVideoOnly": true
   },
   "channels": {
-    "abone": "1368964746597892220",
-    "log": "1368964746597892218"
+    "abone": "EXAMPLE",
+    "log": "EXAMPLE"
   },
   "roles": {
-    "abone": "1371567213131337768"
+    "abone": "EXAMPLE"
   },
   "embeds": {
     "global": {
